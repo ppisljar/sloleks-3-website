@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'head.html' %}
+<body>
+    {% include 'header.html' %}
+
+    <nav class="navbar navbar-light bg-light justify-content-between">
+        <div class="container">
+            <div>&gt; <b>{{ result[2] }}</b> - {{ result[1] }}</div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        
+        <div class="row">
+            {% for tense in ["present"] %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        {{ tense }}
+                    </div>
+                    <div class="card-body">
+                        {% for num in ["singular", "dual", "plural"] %}
+                        {{ num }}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>form</th>
+                                    <th>ipa</th>
+                                    <th>msd</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in ["first", "second", "third"] %}
+                                <tr>
+                                    <td>{{ forms[tense][num][row]["form"] }}</td>
+                                    <td>{{ forms[tense][num][row]["ipa"] }}</td>
+                                    <td>{{ forms[tense][num][row]["msd"] }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+            {% for tense in ["participle"] %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        {{ tense }}
+                    </div>
+                    <div class="card-body">
+                        {% for num in ["singular", "dual", "plural"] %}
+                        {{ num }}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>form</th>
+                                    <th>ipa</th>
+                                    <th>msd</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in ["masculine", "feminine", "neuter"] %}
+                                <tr>
+                                    <td>{{ forms[tense][num][row]["form"] }}</td>
+                                    <td>{{ forms[tense][num][row]["ipa"] }}</td>
+                                    <td>{{ forms[tense][num][row]["msd"] }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            {% for tense in ["imperative"] %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        {{ tense }}
+                    </div>
+                    <div class="card-body">
+                        {% for num in ["singular", "dual", "plural"] %}
+                        {{ num }}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>form</th>
+                                    <th>ipa</th>
+                                    <th>msd</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in ["second"] %}
+                                <tr>
+                                    <td>{{ forms[tense][num][row]["form"] }}</td>
+                                    <td>{{ forms[tense][num][row]["ipa"] }}</td>
+                                    <td>{{ forms[tense][num][row]["msd"] }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        Other
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>form</th>
+                                    <th>ipa</th>
+                                    <th>msd</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for tense in ["supine", "infinitive"] %}
+                                <tr>
+                                    <td>{{ forms[tense]["none"][None]["form"] }}</td>
+                                    <td>{{ forms[tense]["none"][None]["ipa"] }}</td>
+                                    <td>{{ forms[tense]["none"][None]["msd"] }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+
+            
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+    <!-- Link Bootstrap JS from CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

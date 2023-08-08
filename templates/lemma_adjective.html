@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% include 'head.html' %}
+<body>
+    {% include 'header.html' %}
+
+    <nav class="navbar navbar-light bg-light justify-content-between">
+        <div class="container">
+            <div>&gt; <b>{{ result[2] }}</b> - {{ result[1] }}</div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        
+        {% for gender in ["masculine", "feminine", "neuter"] %}
+        
+        <div class="nav">
+                <h5>{{ gender }}</h5>
+          </div>
+        <div class="row">
+            {% for num in ["singular", "dual", "plural"] %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        {{ num }}
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>form</th>
+                                    <th>ipa</th>
+                                    <th>msd</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in ["nominative", "genitive", "dative", "accusative", "locative", "instrumental"] %}
+                                <tr>
+                                    {% if forms[num] is mapping and row in forms[num] %}
+                                    <td>{{ forms[gender][num][row]["form"] }}</td>
+                                    <td>{{ forms[gender][num][row]["ipa"] }}</td>
+                                    <td>{{ forms[gender][num][row]["msd"] }}</td>
+                                    {% else %}
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    {% endif %}       
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- Repeat the above code for the Dual and Plural boxes -->
+
+            
+        </div>
+        {% endfor %}
+
+        
+    </div>
+
+    {% include 'footer.html' %}
+    <!-- Link Bootstrap JS from CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

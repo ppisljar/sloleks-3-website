@@ -1,0 +1,10 @@
+/* Custom CSS for the search bar */
+.search-bar {
+    width: 100px; /* Initial width of the search bar */
+    transition: width 0.2s ease-in-out; /* Smoothly animate the width change */
+}
+
+/* Increase the width of the search bar when focused */
+.search-bar:focus {
+    width: 200px; /* New width of the search bar on focus */
+}

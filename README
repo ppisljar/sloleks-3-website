@@ -1,0 +1,9 @@
+simple website for browsing sloleks 3.0
+
+# getting started
+
+pip install -r requirements.txt
+wget https://huggingface.co/datasets/ppisljar/sloleks-3-sql/sloleks.db
+python service.py
+
+

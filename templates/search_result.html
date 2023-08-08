@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    {% include 'head.html' %}
+<body>
+
+    {% include 'header.html' %}
+
+    <div class="container mt-5">
+        <h2>Search Result for "{{ query }}"</h2>
+        <form id="update-form" method="post">
+            
+            <table class="table mt-3">
+                <thead>
+                    <tr>
+                        <th>Zapis</th>
+                        <th>key</th>
+                        <th>form</th>
+                        <th>naglas</th>
+                        <th contenteditable="true">IPA</th>
+                        <th>SAMPA</th>
+                        <!-- Add more table headers here -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in result %}
+                    <tr>
+                        <input type="hidden" name="id" value="{{ row[0] }}" />
+                        <td>{{ row[14] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[17] }}</td>
+                        <td>{{ row[19] }}</td>
+                        <td contenteditable="true" id="ipa_{{ row[0] }}">{{ row[27] }}</td>
+                        <td>{{ row[23] }}</td>
+                        <!-- Add more table data here -->
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </form>
+    </div>
+
+    {% include 'footer.html' %}
+
+    <script>
+        function copyContent (id) {
+            return document.getElementById("ipa_" + id).innerHTML;
+        }
+
+        const form = document.getElementById('update-form');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const entries = formData.entries();
+            const updateData = {};
+
+            
+
+            for (const entry of entries) {
+                const key = entry[1];
+                const value = copyContent(key)
+                updateData[key] = value;
+            }
+
+            const response = await fetch('/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updateData)
+            });
+
+            if (response.ok) {
+                alert('Database updated successfully!');
+            } else {
+                alert('Failed to update the database.');
+            }
+        });
+    </script>
+</body>
+</html>
+
